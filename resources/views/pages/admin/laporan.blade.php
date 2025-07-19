@@ -45,7 +45,7 @@
                                 Search
                             </button>
 
-                            @if (request('tgl_surat_masuk') || request('tgl_surat_keluar'))
+                            @if (request('tgl_surat_masuk') || request('tgl_surat_keluar') || request('jenis_surat'))
                                 <a href="{{ route('admin.laporan') }}"
                                     class="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2.5 px-5 rounded-lg transition-all duration-200">
                                     Clear

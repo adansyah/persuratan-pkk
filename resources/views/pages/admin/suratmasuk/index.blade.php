@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Surat Masuk')
 
 @section('content')
     <div class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100">
@@ -119,9 +120,9 @@
                                         Buu
                                     </td>
                                     <td class="py-3 px-4">
-                                        <a href="{{ asset('storage/' . $item->file) }}" target="_blank"
+                                        <a href="{{ asset('storage/' . $item->file) }}" target="_blank" download
                                             class="text-blue-500 underline hover:text-blue-700">
-                                            Lihat File
+                                            Unduh File
                                         </a>
                                     </td>
                                     <td class="py-3 px-4">

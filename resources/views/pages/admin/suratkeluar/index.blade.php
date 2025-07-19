@@ -146,7 +146,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="py-8 text-center text-gray-500">
+                                    <td colspan="10" class="py-8 text-center text-gray-500">
                                         <div class="flex flex-col items-center justify-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-600 mb-4"
                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">

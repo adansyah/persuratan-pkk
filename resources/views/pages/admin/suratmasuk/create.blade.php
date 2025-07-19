@@ -86,7 +86,8 @@
                             <div>
                                 <label for="no_surat" class="block text-sm font-medium text-gray-300 mb-1">No Surat
                                     <span class="text-rose-400">*</span></label>
-                                <input type="text" id="no_surat" name="no_surat" value="{{ old('no_surat') }}" required
+                                <input type="text" id="no_surat" name="no_surat" value="{{ old('no_surat', $nosurat) }}"
+                                    required
                                     class="w-full px-4 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
                                     placeholder="Masukan No Surat" autofocus>
                                 @error('no_surat')
@@ -184,7 +185,7 @@
                                             </label>
                                             <p class="pl-1">or drag and drop</p>
                                         </div>
-                                        <p class="text-xs text-gray-500">PDF, DOCX, PNG up to 10MB</p>
+                                        <p class="text-xs text-gray-500">PDF, DOCX,Max 3MB</p>
                                     </div>
                                 </div>
                                 @error('file')

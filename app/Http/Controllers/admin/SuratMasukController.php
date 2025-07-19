@@ -29,8 +29,8 @@ class SuratMasukController extends Controller
 
     public function create()
     {
-
-        return view('pages.admin.suratmasuk.create');
+        $nosurat = 'SM' . rand(1000, 9999);
+        return view('pages.admin.suratmasuk.create', ['nosurat' => $nosurat]);
     }
 
     public function store(SuratMasukRequest $request)
@@ -98,7 +98,7 @@ class SuratMasukController extends Controller
 
         $suratmasuk->update($validated);
 
-        return redirect()->route('admin.surat-masuk')->with('success', 'Data berhasil diperbarui.');
+        return redirect()->route('admin.surat-masuk.index')->with('success', 'Data berhasil diperbarui.');
         // dd($suratmasuk);
     }
 

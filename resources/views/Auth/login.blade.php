@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Persuratan PKK | Login</title>
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('pkk.png') }}" type="image/x-icon">
 

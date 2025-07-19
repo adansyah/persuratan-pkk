@@ -2,20 +2,20 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AuthController;
-use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\LaporanController;
-use App\Http\Controllers\ketua\LaporanController as KetuaLaporanController;
-use App\Http\Controllers\admin\SuratKeluarController;
-use App\Http\Controllers\ketua\SuratKeluarController as KetuaSuratKeluarController;
-use App\Http\Controllers\ketua\SuratMasukController as KetuaSuratMasukController;
+use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\admin\SuratMasukController;
+use App\Http\Controllers\admin\SuratKeluarController;
+use App\Http\Controllers\ketua\LaporanController as KetuaLaporanController;
 use App\Http\Controllers\ketua\DashboardController as KetuaDashboardController;
+use App\Http\Controllers\ketua\SuratMasukController as KetuaSuratMasukController;
+use App\Http\Controllers\ketua\SuratKeluarController as KetuaSuratKeluarController;
 
 // akses admin
 Route::middleware('admin')->prefix('admin')->group(function () {
     //dashboard & profile & laporan
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('/profile', [AuthController::class, 'profile'])->name('admin.profile');
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/laporan', [LaporanController::class, 'index'])->name('admin.laporan');
     //surat masuk
     Route::resource('surat-masuk', SuratMasukController::class)
@@ -27,6 +27,9 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::resource('surat-keluar', SuratkeluarController::class)
         ->parameters(['surat-keluar' => 'no_surat'])
         ->names('admin.surat-keluar');
+    Route::get('/profile', [AdminProfileController::class, 'index'])->name('admin.profile');
+    Route::get('/profile/edit/{id}', [AdminProfileController::class, 'edit'])->name('admin.profile.edit');
+    Route::put('/profile/update/{id}', [AdminProfileController::class, 'update'])->name('admin.profile.update');
 });
 // akses ketua
 Route::middleware('ketua')->prefix('ketua')->group(function () {
