@@ -78,20 +78,21 @@
         <div class="relative z-10">
             <!-- Logo -->
             <div class="flex justify-center mb-6">
-                <div class="w-16 h-16 rounded-full flex items-center justify-center bg-gradient-to-br from-accent-blue to-accent-hover shadow-glow"
+                <div class="w-16 h-16 rounded-full flex items-center justify-center  from-accent-blue to-accent-hover shadow-glow"
                     data-aos="zoom-in" data-aos-delay="200">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none"
+                    {{-- <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
+                    </svg> --}}
+                    <img src="{{ asset('pkk.png') }}" alt="" class="w-12">
                 </div>
             </div>
 
-            <h2 class="text-3xl font-bold text-center mb-2 text-white" data-aos="fade-down" data-aos-delay="300">Login
-                to Admin</h2>
-            <p class="text-center text-gray-400 mb-8" data-aos="fade-down" data-aos-delay="400">Sign in to continue your
-                Account</p>
+            <h2 class="text-3xl font-bold text-center mb-2 text-white" data-aos="fade-down" data-aos-delay="300">
+                Persuratan PKK</h2>
+            <p class="text-center text-gray-400 mb-8" data-aos="fade-down" data-aos-delay="400">Login Terlebih Dahulu
+            </p>
 
             @if (session('success'))
                 <div class="mb-6 px-4 py-3 rounded-lg bg-green-900/50 border border-green-500" data-aos="fade-in"
@@ -107,7 +108,8 @@
                 </div>
             @endif
 
-            <form action="/dashboard" method="POST" class="space-y-6" data-aos="fade-up" data-aos-delay="600">
+            <form action="{{ route('postLogin') }}" method="POST" class="space-y-6" data-aos="fade-up"
+                data-aos-delay="600">
                 @csrf
 
                 <div class="relative">
@@ -156,20 +158,19 @@
                     <label class="block text-sm font-medium mb-1 text-gray-300">Peran</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-5 w-5"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
                             </svg>
+
                         </div>
-                        <select name="role" id=""
+                        <select name="role" id="" required
                             class="w-full pl-10 pr-4 py-3 rounded-lg bg-gray-800/70 border border-gray-700 placeholder-gray-500 text-gray-300 transition-all input-focus focus:outline-none focus:ring-2 focus:ring-accent-blue">
                             <option value="">-- Pilih Peran --</option>
-                            <option value="">Admin</option>
-                            <option value="">sekretaris</option>
-                            <option value="">Ketua</option>
+                            <option value="admin">Admin</option>
+                            <option value="ketua">Ketua</option>
+                            <option value="sekretaris">sekretaris</option>
                         </select>
 
                     </div>
@@ -179,11 +180,11 @@
                     <div class="flex items-center">
                         <input id="remember-me" name="remember-me" type="checkbox"
                             class="h-4 w-4 text-accent-blue focus:ring-accent-blue border-gray-600 rounded bg-gray-700">
-                        <label for="remember-me" class="ml-2 block text-sm text-gray-400">Remember me</label>
+                        <label for="remember-me" class="ml-2 block text-sm text-gray-400">Ingatkan saya</label>
                     </div>
                     <div class="text-sm">
-                        <a href="#" class="font-medium text-accent-blue hover:text-accent-hover">Forgot
-                            password?</a>
+                        <a href="#" class="font-medium text-accent-blue hover:text-accent-hover">Belum punya
+                            akun?</a>
                     </div>
                 </div>
 
@@ -199,9 +200,6 @@
                     </button>
                 </div>
             </form>
-
-
-
 
         </div>
     </div>

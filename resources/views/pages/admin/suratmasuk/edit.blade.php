@@ -6,18 +6,30 @@
             <!-- Header Section -->
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
                 <div>
-                    <h1 class="text-3xl font-bold text-white mb-2">Input Surat Masuk</h1>
-                    <p class="text-gray-400">Tambahkan Surat Masuk ke dalam sistem</p>
+                    <h1 class="text-3xl font-bold text-white mb-2">Edit Surat Masuk</h1>
+                    <p class="text-gray-400">Update data information for {{ $data->nama_surat }}</p>
                 </div>
-                <a href="{{ route('admin.surat-masuk.index') }}"
-                    class="mt-4 md:mt-0 bg-gray-700 hover:bg-gray-600 text-white font-medium py-2.5 px-5 rounded-lg flex items-center gap-2 transition-all duration-200">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    Kembali
-                </a>
+                <div class="flex gap-3 mt-4 md:mt-0">
+                    {{-- <a href="{{ route('datas.show', $data->pro_id) }}"
+                        class="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2.5 px-5 rounded-lg flex items-center gap-2 transition-all duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                            <path fill-rule="evenodd"
+                                d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        View data
+                    </a> --}}
+                    <a href="{{ route('admin.surat-masuk.index') }}"
+                        class="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2.5 px-5 rounded-lg flex items-center gap-2 transition-all duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Kembali
+                    </a>
+                </div>
             </div>
 
             <!-- Notifications -->
@@ -67,105 +79,139 @@
                     <h2 class="text-xl font-semibold text-white flex items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-cyan-400" viewBox="0 0 20 20"
                             fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                                clip-rule="evenodd" />
+                            <path
+                                d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                         </svg>
-                        Informasi Surat
+                        Edit data Information
                     </h2>
                 </div>
 
-                <form action="{{ route('admin.surat-masuk.store') }}" method="POST" enctype="multipart/form-data"
-                    class="p-6">
+                <form action="{{ route('admin.surat-masuk.update', $data->no_surat) }}" method="POST"
+                    enctype="multipart/form-data" class="p-6">
                     @csrf
+                    @method('PUT')
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Left Column -->
                         <div class="space-y-6">
-                            <!-- No Surat -->
-                            <div>
-                                <label for="no_surat" class="block text-sm font-medium text-gray-300 mb-1">No Surat
-                                    <span class="text-rose-400">*</span></label>
-                                <input type="text" id="no_surat" name="no_surat" value="{{ old('no_surat') }}" required
-                                    class="w-full px-4 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
-                                    placeholder="Masukan No Surat" autofocus>
-                                @error('no_surat')
-                                    <p class="mt-1 text-sm text-rose-400">{{ $message }}</p>
-                                @enderror
-                            </div>
-
                             <!-- Nama Surat -->
+                            <input type="text"
+                                class="w-full px-4 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
+                                name="no_surat" value="{{ $data->no_surat }}" readonly hidden">
                             <div>
                                 <label for="nama_surat" class="block text-sm font-medium text-gray-300 mb-1">Nama Surat
                                     <span class="text-rose-400">*</span></label>
-                                <input type="text" id="nama_surat" name="nama_surat" value="{{ old('nama_surat') }}"
-                                    required
+                                <input type="text" id="nama_surat" name="nama_surat"
+                                    value="{{ old('nama_surat', $data->nama_surat) }}"
                                     class="w-full px-4 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
-                                    placeholder="Masukan Nama Surat">
+                                    placeholder="Enter Nama Surat">
                                 @error('nama_surat')
                                     <p class="mt-1 text-sm text-rose-400">{{ $message }}</p>
                                 @enderror
                             </div>
 
-                            <!-- asal -->
-                            <div>
-                                <label for="asal" class="block text-sm font-medium text-gray-300 mb-1">Asal</label>
-                                <input type="text" id="asal" name="asal" value="{{ old('asal') }}" required
-                                    class="w-full px-4 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
-                                    placeholder="asal surat">
-                                @error('asal')
-                                    <p class="mt-1 text-sm text-rose-400">{{ $message }}</p>
-                                @enderror
-                            </div>
 
-                            <!-- tgl_surat and Discount Row -->
+                            <!-- Tanggal_Surat and Tanggal Diterima -->
                             <div class="grid grid-cols-2 gap-4">
-                                <!-- tgl_surat -->
+                                <!-- Tanggal_Surat -->
                                 <div>
-                                    <label for="tgl_surat" class="block text-sm font-medium text-gray-300 mb-1">Tanggal
-                                        Surat
-                                        <span class="text-rose-400">*</span></label>
-                                    <input type="date" id="tgl_surat" name="tgl_surat" value="{{ old('tgl_surat') }}"
-                                        required min="0" step="0.01"
-                                        class="w-full pl-3 pr-4 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
-                                        placeholder="0.00">
+                                    <label for="Tanggal_Surat" class="block text-sm font-medium text-gray-300 mb-1">Tanggal
+                                        Surat <span class="text-rose-400">*</span></label>
+                                    <div class="relative">
+
+                                        <input type="date" id="Tanggal_Surat" name="tgl_surat"
+                                            value="{{ old('tgl_surat', $data->tgl_surat) }}"
+                                            class="w-full pl-4 pr-4 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
+                                            placeholder="0.00">
+                                    </div>
                                     @error('tgl_surat')
                                         <p class="mt-1 text-sm text-rose-400">{{ $message }}</p>
                                     @enderror
                                 </div>
 
-                                <!-- tgl_diterima -->
+                                <!-- Discount -->
                                 <div>
-                                    <label for="tgl_diterima" class="block text-sm font-medium text-gray-300 mb-1">Tanggal
-                                        Surat Diterima</label>
-                                    <input type="date" id="tgl_diterima" name="tgl_diterima"
-                                        value="{{ old('tgl_diterima') }}"
-                                        class="w-full pr-4 pl-3 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
-                                        placeholder="0">
+                                    <label for="Tanggal_Diterima"
+                                        class="block text-sm font-medium text-gray-300 mb-1">Tanggal
+                                        Diterima <span class="text-rose-400">*</span></label>
+                                    <div class="relative">
+
+                                        <input type="date" id="Tanggal_Diterima" name="tgl_diterima"
+                                            value="{{ old('tgl_diterima', $data->tgl_diterima) }}"
+                                            class="w-full pl-4 pr-4 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
+                                            placeholder="0.00">
+                                    </div>
                                     @error('tgl_diterima')
                                         <p class="mt-1 text-sm text-rose-400">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
 
-                        </div>
-
-                        <!-- Right Column -->
-                        <div class="space-y-6">
-                            <!-- perihal -->
+                            <!-- Asal -->
                             <div>
-                                <label for="perihal" class="block text-sm font-medium text-gray-300 mb-1">Perihal</label>
-                                <textarea id="perihal" name="perihal" rows="4"
+                                <label for="asal" class="block text-sm font-medium text-gray-300 mb-1">Asal <span
+                                        class="text-rose-400">*</span></label>
+                                <input type="text" id="asal" name="asal" value="{{ old('asal', $data->asal) }}"
                                     class="w-full px-4 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
-                                    placeholder="Enter product perihal">{{ old('perihal') }}</textarea>
-                                @error('perihal')
+                                    placeholder="Enter Asal">
+                                @error('asal')
                                     <p class="mt-1 text-sm text-rose-400">{{ $message }}</p>
                                 @enderror
                             </div>
 
+                            <!-- perihal -->
+                            <div>
+                                <label for="perihal" class="block text-sm font-medium text-gray-300 mb-1">perihal <span
+                                        class="text-rose-400">*</span></label>
+                                <textarea id="perihal" name="perihal" rows="4"
+                                    class="w-full px-4 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
+                                    placeholder="Enter data perihal">{{ old('perihal', $data->perihal) }}</textarea>
+                                @error('perihal')
+                                    <p class="mt-1 text-sm text-rose-400">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="space-y-6">
+
+
+                            <!-- Current Image Preview -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Current Image</label>
+                                <div
+                                    class="bg-gray-900/70 border border-gray-700/50 rounded-lg p-4 flex items-center justify-center">
+                                    @if ($data->file)
+                                        <div class="relative group">
+                                            <div
+                                                class="absolute -inset-1 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200">
+                                            </div>
+                                            <div class="relative">
+                                                <img src="{{ filter_var($data->file, FILTER_VALIDATE_URL) ? $data->file : Storage::url($data->file) }}"
+                                                    alt="{{ $data->pro_name }}" class="h-40 object-contain rounded-lg"
+                                                    loading="lazy" onerror="this.src='/images/fallback.jpg'"
+                                                    id="current-file">
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="h-40 w-full flex items-center justify-center text-gray-500">
+                                            <div class="text-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="h-12 w-12 mx-auto text-gray-600 mb-2" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                </svg>
+                                                <p>No image available</p>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
                             <!-- file Upload -->
                             <div>
-                                <label for="file" class="block text-sm font-medium text-gray-300 mb-1">Upload File
+                                <label for="file" class="block text-sm font-medium text-gray-300 mb-1">New file
                                     (Upload)</label>
                                 <div
                                     class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-700 border-dashed rounded-lg">
@@ -180,7 +226,8 @@
                                             <label for="file"
                                                 class="relative cursor-pointer bg-gray-800 rounded-md font-medium text-cyan-400 hover:text-cyan-300 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-cyan-500">
                                                 <span class="px-2">Upload a file</span>
-                                                <input id="file" name="file" type="file" class="sr-only">
+                                                <input id="file" name="file" type="file" class="sr-only"
+                                                    onchange="previewImage(this)">
                                             </label>
                                             <p class="pl-1">or drag and drop</p>
                                         </div>
@@ -192,7 +239,6 @@
                                 @enderror
                             </div>
 
-
                         </div>
                     </div>
 
@@ -202,11 +248,10 @@
                             class="bg-cyan-600 hover:bg-cyan-700 text-white font-medium py-2.5 px-6 rounded-lg transition-all duration-200 shadow-lg shadow-cyan-900/20 flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                 fill="currentColor">
-                                <path fill-rule="evenodd"
-                                    d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                                    clip-rule="evenodd" />
+                                <path
+                                    d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                             </svg>
-                            Add Surat
+                            Update Surat
                         </button>
                         <a href="{{ route('admin.surat-masuk.index') }}"
                             class="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2.5 px-6 rounded-lg transition-all duration-200 flex items-center gap-2">
@@ -260,6 +305,21 @@
             background: #4B5563;
         }
 
+        /* Glow effects */
+        .bg-gradient-to-r {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                opacity: 0.25;
+            }
+
+            to {
+                opacity: 0.35;
+            }
+        }
+
         /* Smooth transitions */
         .transition-all {
             transition-property: all;
@@ -270,21 +330,33 @@
 
     <script>
         // Preview uploaded image
-        document.addEventListener('DOMContentLoaded', function() {
-            const imageInput = document.getElementById('file');
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
 
-            if (imageInput) {
-                imageInput.addEventListener('change', function(e) {
-                    if (e.target.files && e.target.files[0]) {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            // You could add image preview functionality here
-                            console.log('Image loaded:', e.target.result);
-                        }
-                        reader.readAsDataURL(e.target.files[0]);
+                reader.onload = function(e) {
+                    const currentImage = document.getElementById('current-file');
+                    if (currentImage) {
+                        currentImage.src = e.target.result;
                     }
-                });
+                }
+
+                reader.readAsDataURL(input.files[0]);
             }
-        });
+        }
+
+        // Preview image from URL
+        function previewImageUrl(url) {
+            if (url) {
+                const currentImage = document.getElementById('current-file');
+                if (currentImage) {
+                    currentImage.src = url;
+                    // Set a fallback in case the URL is invalid
+                    currentImage.onerror = function() {
+                        this.src = '/images/fallback.jpg';
+                    }
+                }
+            }
+        }
     </script>
 @endsection

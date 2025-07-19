@@ -4,15 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Laporan extends Model
+class SuratKeluar extends Model
 {
+    protected $table = 'surat-keluars';
     protected $fillable = [
-        'user_id',
-        'jenis_surat',
-        'tgl_surat_masuk',
-        'tgl_surat_keluar',
+        'no_surat',
+        'nama_surat',
+        'tgl_surat',
+        'tgl_dikirim',
+        'tujuan',
         'keterangan',
+        'perihal',
         'file',
+        'user_id',
+        'status'
     ];
 
     public function user()
@@ -23,10 +28,5 @@ class Laporan extends Model
     public function suratMasuk()
     {
         return $this->belongsTo(SuratMasuk::class);
-    }
-
-    public function suratKeluar()
-    {
-        return $this->belongsTo(SuratKeluar::class);
     }
 }

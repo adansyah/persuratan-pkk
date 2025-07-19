@@ -3,26 +3,11 @@
 @section('content')
     <div class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100">
         <div class="container mx-auto px-4 py-8">
-            <!-- Header Section -->
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-                <div>
-                    <h1 class="text-3xl font-bold text-white mb-2">Surat Masuk</h1>
-                    <p class="text-gray-400">Manage your Surat inventory</p>
-                </div>
-                <a href="{{ route('admin.surat-masuk.create') }}"
-                    class="mt-4 md:mt-0 bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2.5 px-5 rounded-lg flex items-center gap-2 transition-all duration-200 shadow-lg shadow-emerald-900/20">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    Add Surat
-                </a>
-            </div>
+
 
             <!-- Search & Filters -->
             <div class="bg-gray-800/50 rounded-xl p-5 border border-gray-700/50 mb-8 shadow-lg">
-                <form action="{{ route('admin.surat-masuk.index') }}" method="GET">
+                <form action="{{ route('ketua.surat-masuk.index') }}" method="GET">
                     <div class="flex flex-col md:flex-row gap-4">
                         <div class="relative flex-grow">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -43,7 +28,7 @@
                                 Search
                             </button>
                             @if (request('search'))
-                                <a href="{{ route('admin.surat-masuk.index') }}"
+                                <a href="{{ route('ketua.surat-masuk.index') }}"
                                     class="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2.5 px-5 rounded-lg transition-all duration-200 flex-shrink-0">
                                     Clear
                                 </a>
@@ -92,10 +77,7 @@
                                 <th class="py-3 px-4">Perihal</th>
                                 <th class="py-3 px-4">File Surat</th>
                                 <th class="py-3 px-4">Status Surat</th>
-                                <th class="py-3 px-4">Action</th>
-
-                            </tr>
-                        </thead>
+                                <th class="py-3 px-4">Dibuat Oleh</th </thead>
                         <tbody class="divide-y divide-gray-800/50">
                             @forelse ($suratmasuk as $item)
                                 <tr class="hover:bg-gray-700/30 transition-colors duration-150 text-center text-sm">
@@ -143,44 +125,12 @@
                                         @endif
                                     </td>
                                     <td class="py-3 px-4">
-                                        <div class="flex gap-2">
-                                            <a href="{{ route('admin.surat-masuk.disposisi', $item->no_surat) }}"
-                                                class="p-2 bg-green-500/50 hover:bg-green-700 text-gray-300 hover:text-white rounded-lg transition-colors"
-                                                title="View">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    class="h-5 w-5" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                                </svg>
-                                            </a>
-                                            <a href="{{ route('admin.surat-masuk.edit', $item->no_surat) }}"
-                                                class="p-2 bg-cyan-600/20 hover:bg-cyan-600/40 text-cyan-400 hover:text-cyan-300 rounded-lg transition-colors"
-                                                title="Edit">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                </svg>
-                                            </a>
-                                            <form action="{{ route('admin.surat-masuk.destroy', $item->no_surat) }}"
-                                                method="POST"
-                                                onsubmit="return confirm('Apa Anda Yakin Ingin Menghapus Data Ini?');"
-                                                class="inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="p-2 bg-rose-600/20 hover:bg-rose-600/40 text-rose-400 hover:text-rose-300 rounded-lg transition-colors"
-                                                    title="Delete">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                    </svg>
-                                                </button>
-                                            </form>
-                                        </div>
+                                        <span
+                                            class="px-2.5 py-1 bg-green-500/50 text-gray-300 rounded-full text-xs font-medium">
+                                            {{ $item->user->role }}
+                                        </span>
                                     </td>
+
                                 </tr>
                             @empty
                                 <tr>

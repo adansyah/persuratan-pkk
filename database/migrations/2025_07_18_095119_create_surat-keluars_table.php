@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('surat-keluars', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('no_surat')->constrained('surat-masuks');
+            $table->foreignId('user_id')->constrained('users')->references('id')->onDelete('cascade');
+            $table->string('no_surat');
+            $table->string('nama_surat');
             $table->date('tgl_surat');
             $table->date('tgl_dikirim');
-            $table->string('tujuan');
+            $table->string('keterangan');
             $table->string('perihal');
             $table->string('file');
+            $table->enum('status', ['dibatalkan', 'diterima']);
             $table->timestamps();
         });
     }

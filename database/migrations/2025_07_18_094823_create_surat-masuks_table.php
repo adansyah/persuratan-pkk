@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('no_surat');
+            $table->string('nama_surat');
             $table->date('tgl_surat');
             $table->date('tgl_diterima');
             $table->string('asal');
             $table->string('perihal');
             $table->string('file');
+            $table->enum('status', ['proses', 'dibatalkan', 'diterima'])->default('proses');
             $table->timestamps();
         });
     }

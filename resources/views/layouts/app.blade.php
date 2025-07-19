@@ -145,7 +145,9 @@
                     </svg>
                 </button>
             </div>
-
+            @php
+                $user = auth()->user();
+            @endphp
             <!-- Navigation -->
             <div class="py-4 flex flex-col h-[calc(100%-4rem)]">
                 <!-- Main Navigation -->
@@ -153,51 +155,44 @@
                     <div class="sidebar-group-label text-xs font-medium text-sidebar-foreground/70 px-3 mb-2">Main</div>
 
                     <!-- Dashboard -->
-                    <a href="/dashboard"
-                        class="sidebar-menu-item flex items-center h-10 px-3 rounded-md text-sm font-medium {{ request()->is('dashboard') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'hover:bg-sidebar-border/50' }} transition-colors"
+                    <a href="{{ route($user->role . '.dashboard') }}"
+                        class="sidebar-menu-item flex items-center h-10 px-3 rounded-md text-sm font-medium {{ request()->routeIs($user->role . '.dashboard') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'hover:bg-sidebar-border/50' }} transition-colors"
                         aria-label="Dashboard">
                         <i class="fas fa-tachometer-alt w-5 h-5"></i>
                         <span class="ml-3 sidebar-text">Dashboard</span>
                     </a>
 
                     <!-- surat masuk -->
-                    <a href="/surat-masuk"
-                        class="sidebar-menu-item flex items-center h-10 px-3 rounded-md text-sm font-medium {{ request()->is('surat-masuk') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'hover:bg-sidebar-border/50' }} transition-colors"
-                        aria-label="surat-masuk">
+                    <a href="{{ route($user->role . '.surat-masuk.index') }}"
+                        class="sidebar-menu-item flex items-center h-10 px-3 rounded-md text-sm font-medium {{ request()->routeIs($user->role . '.surat-masuk.index') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'hover:bg-sidebar-border/50' }} transition-colors"
+                        aria-label="surat-masuk.index">
                         <i class="fas fa-file-archive w-5 h-5"></i>
                         <span class="ml-3 sidebar-text">Surat Masuk</span>
                     </a>
 
                     <!-- surat keluar -->
-                    <a href="/surat-keluar"
-                        class="sidebar-menu-item flex items-center h-10 px-3 rounded-md text-sm font-medium {{ request()->is('surat-keluar') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'hover:bg-sidebar-border/50' }} transition-colors"
+                    <a href="{{ route($user->role . '.surat-keluar.index') }}"
+                        class="sidebar-menu-item flex items-center h-10 px-3 rounded-md text-sm font-medium {{ request()->routeIs($user->role . '.surat-keluar.index') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'hover:bg-sidebar-border/50' }} transition-colors"
                         aria-label="surat-keluar">
                         <i class="fas fa-file-export w-5 h-5"></i>
                         <span class="ml-3 sidebar-text">Surat Keluar</span>
                     </a>
 
                     <!-- laporan -->
-                    <a href="/laporan"
-                        class="sidebar-menu-item flex items-center h-10 px-3 rounded-md text-sm font-medium {{ request()->is('laporan') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'hover:bg-sidebar-border/50' }} transition-colors"
+                    <a href="{{ route($user->role . '.laporan') }}"
+                        class="sidebar-menu-item flex items-center h-10 px-3 rounded-md text-sm font-medium {{ request()->routeIs($user->role . '.laporan') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'hover:bg-sidebar-border/50' }} transition-colors"
                         aria-label="laporan">
                         <i class="fas fa-clipboard w-5 h-5"></i>
                         <span class="ml-3 sidebar-text">Laporan</span>
                     </a>
                 </div>
-
-
-
                 <!-- Settings Section -->
                 <div class="px-3 mt-6 space-y-1">
                     <div class="sidebar-group-label text-xs font-medium text-sidebar-foreground/70 px-3 mb-2">Settings
                     </div>
-                    <a href="/settings"
-                        class="sidebar-menu-item flex items-center h-10 px-3 rounded-md text-sm font-medium {{ request()->is('settings') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'hover:bg-sidebar-border/50' }} transition-colors">
-                        <i class="fas fa-cog w-5 h-5"></i>
-                        <span class="ml-3 sidebar-text">Settings</span>
-                    </a>
-                    <a href="/profile"
-                        class="sidebar-menu-item flex items-center h-10 px-3 rounded-md text-sm font-medium {{ request()->is('profile') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'hover:bg-sidebar-border/50' }} transition-colors">
+
+                    <a href="{{ route($user->role . '.profile') }}"
+                        class="sidebar-menu-item flex items-center h-10 px-3 rounded-md text-sm font-medium {{ request()->routeIs($user->role . '.profile') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'hover:bg-sidebar-border/50' }} transition-colors">
                         <i class="fas fa-user-circle w-5 h-5"></i>
                         <span class="ml-3 sidebar-text">Profile</span>
                     </a>
@@ -216,7 +211,7 @@
                                 {{ auth()->user()->email ?? 'user@example.com' }}</div>
                         </div>
                     </div>
-                    <form action="" method="POST">
+                    <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit"
                             class="sidebar-menu-item flex items-center h-10 w-full px-3 rounded-md text-sm font-medium text-red-400 hover:bg-red-500/10 transition-colors">
@@ -271,9 +266,8 @@
             <footer
                 class="border-t border-gray-200 dark:border-gray-800 py-4 px-6 text-center text-sm text-gray-500 dark:text-gray-400">
                 <p>
-                    Developed by <a href="https://github.com/adansyah"
-                        class="font-medium text-primary hover:underline" target="_blank"
-                        rel="noopener noreferrer">Syahdan Mutahariq | Fullstack Developer</a>
+                    Developed by <a href="https://github.com/adansyah" class="font-medium text-primary hover:underline"
+                        target="_blank" rel="noopener noreferrer">Syahdan Mutahariq | Fullstack Developer</a>
                 </p>
                 <p class="mt-1">
                     &copy; 2025 Persuratan PKK. All rights reserved.

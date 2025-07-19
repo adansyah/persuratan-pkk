@@ -27,11 +27,13 @@
                             <p class="text-4xl font-bold text-white mb-3">{{ $suratmasuk }}</p>
                         </div>
                         <div class="p-3 rounded-lg bg-cyan-600/10 border border-cyan-600/20">
+
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-10 w-10 text-cyan-400"
                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
                             </svg>
+
                         </div>
                     </div>
                 </div>
@@ -55,6 +57,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M21.75 9v.906a2.25 2.25 0 0 1-1.183 1.981l-6.478 3.488M2.25 9v.906a2.25 2.25 0 0 0 1.183 1.981l6.478 3.488m8.839 2.51-4.66-2.51m0 0-1.023-.55a2.25 2.25 0 0 0-2.134 0l-1.022.55m0 0-4.661 2.51m16.5 1.615a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V8.844a2.25 2.25 0 0 1 1.183-1.981l7.5-4.039a2.25 2.25 0 0 1 2.134 0l7.5 4.039a2.25 2.25 0 0 1 1.183 1.98V19.5Z" />
                             </svg>
+
                         </div>
                     </div>
                 </div>
@@ -69,18 +72,19 @@
                 <div class="py-12 px-6">
                     <div class="flex justify-between items-center">
                         <div>
-                            <h2 class="text-gray-400 font-medium mb-1">Pengguna</h2>
-                            <p class="text-4xl font-bold text-white mb-3">{{ $user }}</p>
+                            <h2 class="text-gray-400 font-medium mb-1">Total Disposisi</h2>
+                            <p class="text-4xl font-bold text-white mb-3">{{ $disposisi }}</p>
                             <div class="flex items-center text-sm">
 
                             </div>
                         </div>
-                        <div class="p-3 rounded-lg bg-amber-600/10 border border-amber-600/20">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-10 w-10 text-amber-400"
+                        <div class="p-3 rounded-lg bg-emerald-600/10 border border-emerald-600/20">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-10 h-10 text-emerald-400"
                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
+
                         </div>
                     </div>
                 </div>

@@ -13,18 +13,13 @@ return new class extends Migration
     {
         Schema::create('laporans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->enum('jenis_surat', ['masuk', 'keluar']); // untuk menandai jenis surat
-            $table->unsignedBigInteger('surat_masuk_id')->nullable();
-            $table->unsignedBigInteger('surat_keluar_id')->nullable();
-
-            $table->date('tanggal_laporan'); // untuk filter laporan berdasarkan tanggal
-            $table->text('keterangan')->nullable(); // deskripsi atau catatan tambahan
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->enum('jenis_surat', ['masuk', 'keluar']);
+            $table->date('tgl_surat_masuk')->nullable();
+            $table->date('tgl_surat_keluar')->nullable();
+            $table->text('keterangan')->nullable();
+            $table->string('file')->nullable();
             $table->timestamps();
-
-            // Relasi opsional
-            $table->foreign('surat_masuk_id')->references('id')->on('surat-masuks')->onDelete('set null');
-            $table->foreign('surat_keluar_id')->references('id')->on('surat-keluars')->onDelete('set null');
         });
     }
 
