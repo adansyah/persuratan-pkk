@@ -7,7 +7,7 @@
         <div class="flex flex-col md:flex-row justify-between items-center mb-8">
             <div class="mb-4 md:mb-0">
                 <h1 class="text-3xl font-bold text-gray-100">Dashboard</h1>
-                <p class="text-gray-400 mt-1">Selamat Datang {{ Auth::user()->name ?? 'User' }} di Pesrsuratan PKK</p>
+                <p class="text-gray-400 mt-1">Selamat Datang {{ Auth::user()->name ?? 'User' }} di Persuratan PKK</p>
             </div>
 
         </div>

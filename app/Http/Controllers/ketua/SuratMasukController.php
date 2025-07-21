@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\ketua;
 
 use App\Models\SuratMasuk;
+use App\Models\SuratKeluar;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class SuratMasukController extends Controller
 {
@@ -18,5 +20,13 @@ class SuratMasukController extends Controller
         })->latest()->paginate(10)->withQueryString();
 
         return view('pages.ketua.surat-masuk', compact('suratmasuk'));
+    }
+
+    public function exportPDF($no_surat)
+    {
+        $suratmasuk = SuratMasuk::where('no_surat', $no_surat)->firstOrFail();
+
+        $pdf = Pdf::loadView('pages.ketua.exportmasuk', compact('suratmasuk', 'no_surat'));
+        return $pdf->download('data_surat-masuk.pdf');
     }
 }

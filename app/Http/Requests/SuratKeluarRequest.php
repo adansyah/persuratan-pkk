@@ -17,7 +17,7 @@ class SuratKeluarRequest extends FormRequest
             'perihal' => 'nullable|max:255',
             'file' => 'nullable|mimes:pdf,doc,docx,png|max:2048',
             'user_id' => 'nullable|exists:users,id',
-            'status' => 'nullable|in:dibatalkan,diterima',
+            'status' => 'nullable|in:proses,dibatalkan,diterima',
         ];
     }
 }

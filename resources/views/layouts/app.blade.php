@@ -201,10 +201,16 @@
                 <!-- User Profile and Logout -->
                 <div class="mt-auto border-t border-sidebar-border pt-4 px-3">
                     <div class="sidebar-profile flex items-center p-3 mb-2">
-                        <div
-                            class="h-9 w-9 rounded-full bg-sidebar-accent/20 flex items-center justify-center text-sidebar-accent font-bold">
-                            {{ auth()->user()->name[0] ?? 'U' }}
-                        </div>
+                        @if (auth()->user()->file)
+                            <img src="{{ Storage::url(auth()->user()->file) }}" alt="{{ auth()->user()->name }}"
+                                class="h-9 w-9 rounded-full object-cover border border-gray-600 shadow-sm"
+                                onerror="this.src='/images/fallback.jpg'">
+                        @else
+                            <div
+                                class="h-9 w-9 rounded-full bg-sidebar-accent/20 flex items-center justify-center text-sidebar-accent font-bold uppercase">
+                                {{ auth()->user()->name[0] ?? 'U' }}
+                            </div>
+                        @endif
                         <div class="ml-3 sidebar-profile-name">
                             <div class="text-sm font-medium">{{ auth()->user()->name ?? 'User' }}</div>
                             <div class="text-xs text-sidebar-foreground/70">
@@ -242,11 +248,7 @@
                 <!-- Right side navigation items -->
                 <div class="flex items-center space-x-4">
                     <!-- Notifications -->
-                    <button
-                        class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 relative">
-                        <i class="fas fa-bell text-xl"></i>
-                        <span class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
-                    </button>
+
 
                     <!-- Theme Toggle -->
                     <button id="theme-toggle"

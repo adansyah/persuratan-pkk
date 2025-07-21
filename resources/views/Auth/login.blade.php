@@ -176,7 +176,7 @@
                     </div>
                 </div>
 
-                <div class="flex items-center justify-between">
+                {{-- <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <input id="remember-me" name="remember-me" type="checkbox"
                             class="h-4 w-4 text-accent-blue focus:ring-accent-blue border-gray-600 rounded bg-gray-700">
@@ -186,7 +186,7 @@
                         <a href="#" class="font-medium text-accent-blue hover:text-accent-hover">Belum punya
                             akun?</a>
                     </div>
-                </div>
+                </div> --}}
 
                 <div>
                     <button type="submit"

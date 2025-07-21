@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Edit Surat Masuk')
+
 @section('content')
     <div class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100">
         <div class="container mx-auto px-4 py-8">
@@ -200,7 +202,7 @@
                                             </label>
                                             <p class="pl-1">or drag and drop</p>
                                         </div>
-                                        <p class="text-xs text-gray-500">PDF, DOCX, PNG up to 10MB</p>
+                                        <p class="text-xs text-gray-500">PDF, DOCX, Max to 3MB</p>
                                     </div>
                                 </div>
                                 @error('file')

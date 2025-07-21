@@ -10,10 +10,10 @@ class SekretarisMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->check() && auth()->user()->role === 'admin') {
+        if (auth()->check() && auth()->user()->role === 'sekretaris') {
             return $next($request);
         }
 
-        abort(403, 'Akses hanya untuk Admin');
+        abort(403, 'Akses hanya untuk Sekretaris');
     }
 }

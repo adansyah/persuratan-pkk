@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\SuratMasukRequest;
 use App\Http\Requests\SuratKeluarRequest;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class SuratMasukController extends Controller
 {
@@ -167,5 +168,13 @@ class SuratMasukController extends Controller
         $suratmasuk->delete();
 
         return redirect()->route('admin.surat-masuk.index')->with('success', 'Data berhasil dihapus.');
+    }
+
+    public function exportPDF($no_surat)
+    {
+        $suratmasuk = SuratMasuk::where('no_surat', $no_surat)->firstOrFail();
+
+        $pdf = Pdf::loadView('pages.admin.suratmasuk.export', compact('suratmasuk', 'no_surat'));
+        return $pdf->download('data_surat-masuk.pdf');
     }
 }

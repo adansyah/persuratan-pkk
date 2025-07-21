@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Input Surat Masuk')
+
 @section('content')
     <div class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100">
         <div class="container mx-auto px-4 py-8">
@@ -88,8 +90,8 @@
                                     <span class="text-rose-400">*</span></label>
                                 <input type="text" id="no_surat" name="no_surat" value="{{ old('no_surat', $nosurat) }}"
                                     required
-                                    class="w-full px-4 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
-                                    placeholder="Masukan No Surat" autofocus>
+                                    class="w-full px-4 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg text-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
+                                    placeholder="Masukan No Surat" autofocus readonly>
                                 @error('no_surat')
                                     <p class="mt-1 text-sm text-rose-400">{{ $message }}</p>
                                 @enderror
@@ -110,7 +112,8 @@
 
                             <!-- asal -->
                             <div>
-                                <label for="asal" class="block text-sm font-medium text-gray-300 mb-1">Asal</label>
+                                <label for="asal" class="block text-sm font-medium text-gray-300 mb-1">Asal <span
+                                        class="text-rose-400">*</span></label>
                                 <input type="text" id="asal" name="asal" value="{{ old('asal') }}" required
                                     class="w-full px-4 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
                                     placeholder="asal surat">
@@ -155,10 +158,11 @@
                         <div class="space-y-6">
                             <!-- perihal -->
                             <div>
-                                <label for="perihal" class="block text-sm font-medium text-gray-300 mb-1">Perihal</label>
+                                <label for="perihal" class="block text-sm font-medium text-gray-300 mb-1">Perihal <span
+                                        class="text-rose-400">*</span></label>
                                 <textarea id="perihal" name="perihal" rows="4"
                                     class="w-full px-4 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
-                                    placeholder="Enter product perihal">{{ old('perihal') }}</textarea>
+                                    placeholder="Enter  perihal">{{ old('perihal') }}</textarea>
                                 @error('perihal')
                                     <p class="mt-1 text-sm text-rose-400">{{ $message }}</p>
                                 @enderror

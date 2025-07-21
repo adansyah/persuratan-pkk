@@ -1,13 +1,15 @@
 @extends('layouts.app')
 
+@section('title', 'Edit Profile')
+
 @section('content')
     <div class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100">
         <div class="container mx-auto px-4 py-8">
             <!-- Header Section -->
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
                 <div>
-                    <h1 class="text-3xl font-bold text-white mb-2">Edit Surat Masuk</h1>
-                    <p class="text-gray-400">Update data information for {{ $data->name }}</p>
+                    <h1 class="text-3xl font-bold text-white mb-2">Edit Profile</h1>
+                    <p class="text-gray-400">Ubah data informasi untuk {{ $data->name }}</p>
                 </div>
                 <div class="flex gap-3 mt-4 md:mt-0">
 
@@ -85,61 +87,58 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Left Column -->
                         <div class="space-y-6">
-                            <!-- Nama Surat -->
+                            <!-- Nama -->
                             <div>
-                                <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Nama Surat
+                                <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Nama Lengkap
                                     <span class="text-rose-400">*</span></label>
                                 <input type="text" id="name" name="name" value="{{ old('name', $data->name) }}"
                                     class="w-full px-4 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
-                                    placeholder="Enter Nama Surat">
+                                    placeholder="Enter Nama">
                                 @error('name')
                                     <p class="mt-1 text-sm text-rose-400">{{ $message }}</p>
                                 @enderror
                             </div>
 
 
-                            <!-- email and Tanggal Diterima -->
-                            <div class="grid grid-cols-2 gap-4">
-                                <!-- email -->
-                                <div>
-                                    <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Tanggal
-                                        Surat <span class="text-rose-400">*</span></label>
-                                    <div class="relative">
+                            <!-- email  -->
+                            <!-- email -->
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-300 mb-1">email <span
+                                        class="text-rose-400">*</span></label>
+                                <div class="relative">
 
-                                        <input type="email" id="email" name="email"
-                                            value="{{ old('email', $data->email) }}"
-                                            class="w-full pl-4 pr-4 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
-                                            placeholder="0.00">
-                                    </div>
-                                    @error('email')
-                                        <p class="mt-1 text-sm text-rose-400">{{ $message }}</p>
-                                    @enderror
+                                    <input type="email" id="email" name="email"
+                                        value="{{ old('email', $data->email) }}"
+                                        class="w-full pl-4 pr-4 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
+                                        placeholder="Enter Email">
                                 </div>
+                                @error('email')
+                                    <p class="mt-1 text-sm text-rose-400">{{ $message }}</p>
+                                @enderror
+                            </div>
 
-                                <!-- Discount -->
-                                <div>
-                                    <label for="password" class="block text-sm font-medium text-gray-300 mb-1">Tanggal
-                                        Diterima <span class="text-rose-400">*</span></label>
+                            <!-- password -->
+                            <div>
+                                <label for="password" class="block text-sm font-medium text-gray-300 mb-1">Password
+
                                     <div class="relative">
 
                                         <input type="password" id="password" name="password"
-                                            value="{{ old('password', $data->password) }}"
                                             class="w-full pl-4 pr-4 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
-                                            placeholder="0.00">
+                                            placeholder="********">
                                     </div>
                                     @error('password')
                                         <p class="mt-1 text-sm text-rose-400">{{ $message }}</p>
                                     @enderror
-                                </div>
                             </div>
 
                             <!-- role -->
                             <div>
-                                <label for="role" class="block text-sm font-medium text-gray-300 mb-1">role <span
+                                <label for="role" class="block text-sm font-medium text-gray-300 mb-1">Jabatan <span
                                         class="text-rose-400">*</span></label>
                                 <select name="role" required class="w-full p-3 rounded bg-gray-800 text-white mb-4"
                                     required>
-                                    <option value="">-- Pilih role --</option>
+                                    <option value="">-- Pilih Jabatan --</option>
                                     <option value="admin" {{ old('role', $data->role) == 'admin' ? 'selected' : '' }}>
                                         admin</option>
                                     <option value="sekretaris"
@@ -170,22 +169,18 @@
                                             </div>
                                             <div class="relative">
                                                 <img src="{{ filter_var($data->file, FILTER_VALIDATE_URL) ? $data->file : Storage::url($data->file) }}"
-                                                    alt="{{ $data->name }}" class="h-40 object-contain rounded-lg"
-                                                    loading="lazy" onerror="this.src='/images/fallback.jpg'"
-                                                    id="current-file">
+                                                    alt="no data" class="h-40 object-contain rounded-lg" loading="lazy"
+                                                    onerror="this.src='/images/fallback.jpg'" id="current-file">
                                             </div>
                                         </div>
                                     @else
-                                        <div class="h-40 w-full flex items-center justify-center text-gray-500">
-                                            <div class="text-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                    class="h-12 w-12 mx-auto text-gray-600 mb-2" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                                </svg>
-                                                <p>No image available</p>
+                                        <div
+                                            class="h-40 w-full flex flex-col items-center justify-center text-gray-500 relative group">
+                                            <div
+                                                class="absolute -inset-1 bg-gradient-to-r from-zinc-600 to-zinc-600 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200">
                                             </div>
+                                            <img id="current-file" src="/images/fallback.jpg" alt="Preview"
+                                                class="h-40 object-contain rounded-lg" loading="lazy" />
                                         </div>
                                     @endif
                                 </div>
@@ -213,7 +208,7 @@
                                             </label>
                                             <p class="pl-1">or drag and drop</p>
                                         </div>
-                                        <p class="text-xs text-gray-500">PDF, DOCX, PNG up to 10MB</p>
+                                        <p class="text-xs text-gray-500">PNG, JPG, JPEG Max to 5MB</p>
                                     </div>
                                 </div>
                                 @error('file')
@@ -232,7 +227,7 @@
                                 <path
                                     d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                             </svg>
-                            Update Surat
+                            Update
                         </button>
                         <a href="{{ route('admin.profile') }}"
                             class="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2.5 px-6 rounded-lg transition-all duration-200 flex items-center gap-2">
@@ -311,43 +306,27 @@
 
     <script>
         function previewImage(input) {
-            const previewContainer = document.getElementById('current-file');
-            const file = input.files[0];
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                const currentImage = document.getElementById('current-file');
 
-            if (!file || !previewContainer) return;
+                if (file.type.startsWith("image/")) {
+                    const reader = new FileReader();
 
-            const fileType = file.type;
+                    reader.onload = function(e) {
+                        if (currentImage) {
+                            currentImage.src = e.target.result;
+                        }
+                    }
 
-            // Hanya untuk gambar
-            if (fileType.startsWith("image/")) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    previewContainer.src = e.target.result;
-                    previewContainer.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            } else {
-                // Jika bukan gambar, sembunyikan gambar dan tampilkan URL
-                previewContainer.style.display = 'none';
-
-                // Hapus link sebelumnya jika ada
-                const existingLink = document.getElementById('file-link');
-                if (existingLink) {
-                    existingLink.remove();
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Hanya file gambar (JPG, PNG, JPEG) yang bisa ditampilkan.");
+                    input.value = ""; // reset input
                 }
-
-                // Tampilkan nama file
-                const fileUrl = URL.createObjectURL(file);
-                const link = document.createElement('a');
-                link.href = fileUrl;
-                link.id = 'file-link';
-                link.textContent = 'Lihat File (' + file.name + ')';
-                link.className = 'text-cyan-400 hover:text-cyan-300 mt-3 block';
-                link.target = '_blank';
-
-                previewContainer.parentNode.appendChild(link);
             }
         }
     </script>
+
 
 @endsection

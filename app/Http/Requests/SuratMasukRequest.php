@@ -16,7 +16,7 @@ class SuratMasukRequest extends FormRequest
             'tgl_diterima' => 'required|date',
             'asal' => 'required|max:255',
             'perihal' => 'required|max:255',
-            'file' => 'required|mimes:pdf,doc,docx|max:2048',
+            'file' => 'nullable|mimes:pdf,doc,docx|max:2048',
             'user_id' => 'nullable|exists:users,id',
             'status' => 'nullable|in:proses,dibatalkan,diterima',
         ];

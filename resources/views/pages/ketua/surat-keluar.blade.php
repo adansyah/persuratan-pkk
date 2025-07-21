@@ -1,8 +1,17 @@
 @extends('layouts.app')
 
+@section('title', 'Surat Keluar')
+
 @section('content')
     <div class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100">
         <div class="container mx-auto px-4 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-white mb-2">Surat Keluar</h1>
+                    <p class="text-gray-400">Kelola Data Surat Keluar</p>
+                </div>
+
+            </div>
 
 
             <!-- Search & Filters -->
@@ -78,6 +87,7 @@
                                 <th class="py-3 px-4">File Surat</th>
                                 <th class="py-3 px-4">Status</th>
                                 <th class="py-3 px-4">Ditangani Oleh</th>
+                                <th class="py-3 px-4">Action</th>
 
                             </tr>
                         </thead>
@@ -117,11 +127,27 @@
                                     </td>
                                     <td class="py-3 px-4">
                                         <span
-                                            class="px-2.5 py-1 bg-green-500/50 text-gray-300 rounded-full text-xs font-medium">
+                                            class="px-2.5 py-1 bg-cyan-500/50 text-gray-300 rounded-full text-xs font-medium">
                                             {{ $item->user->role }}
                                         </span>
                                     </td>
+                                    <td class="py-3 px-4">
+                                        <div class="flex flex-col items-center justify-center">
+                                            <a href="{{ route('ketua.suratkeluar.export', $item->no_surat) }}"
+                                                class="p-2 bg-yellow-600/20 hover:bg-yellow-600/40 text-yellow-400 hover:text-yellow-300 rounded-lg transition-colors"
+                                                title="Edit">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-5 w-5"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="size-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                                </svg>
+
+                                            </a>
+                                        </div>
+                                    </td>
                                 </tr>
+
                             @empty
                                 <tr>
                                     <td colspan="7" class="py-8 text-center text-gray-500">

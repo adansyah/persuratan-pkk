@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ketua;
 
 use App\Models\Laporan;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
 
 class LaporanController extends Controller
@@ -28,5 +29,13 @@ class LaporanController extends Controller
         $data = $query->latest()->paginate(10);
 
         return view('pages.ketua.laporan', compact('data'));
+    }
+
+    public function exportPDF()
+    {
+        $laporan = Laporan::all();
+
+        $pdf = Pdf::loadView('pages.ketua.export', compact('laporan'));
+        return $pdf->download('data_laporan.pdf');
     }
 }

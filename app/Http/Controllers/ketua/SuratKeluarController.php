@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ketua;
 use App\Models\SuratKeluar;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class SuratKeluarController extends Controller
 {
@@ -18,5 +19,13 @@ class SuratKeluarController extends Controller
         })->latest()->paginate(10)->withQueryString();
 
         return view('pages.ketua.surat-keluar', compact('data'));
+    }
+
+    public function exportPDF($no_surat)
+    {
+        $suratkeluar = SuratKeluar::where('no_surat', $no_surat)->firstOrFail();
+
+        $pdf = Pdf::loadView('pages.ketua.exportkeluar', compact('suratkeluar', 'no_surat'));
+        return $pdf->download('data_surat-keluar.pdf');
     }
 }

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Edit Surat Keluar')
+
 @section('content')
     <div class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100">
         <div class="container mx-auto px-4 py-8">
@@ -194,39 +196,6 @@
                                     <p class="mt-1 text-sm text-rose-400">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <!-- Current Image Preview -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-300 mb-2">Current Image</label>
-                                <div
-                                    class="bg-gray-900/70 border border-gray-700/50 rounded-lg p-4 flex items-center justify-center">
-                                    @if ($data->file)
-                                        <div class="relative group">
-                                            <div
-                                                class="absolute -inset-1 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200">
-                                            </div>
-                                            <div class="relative">
-                                                <img src="{{ filter_var($data->file, FILTER_VALIDATE_URL) ? $data->file : Storage::url($data->file) }}"
-                                                    alt="{{ $data->pro_name }}" class="h-40 object-contain rounded-lg"
-                                                    loading="lazy" onerror="this.src='/images/fallback.jpg'"
-                                                    id="current-file">
-                                            </div>
-                                        </div>
-                                    @else
-                                        <div class="h-40 w-full flex items-center justify-center text-gray-500">
-                                            <div class="text-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                    class="h-12 w-12 mx-auto text-gray-600 mb-2" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                                </svg>
-                                                <p>No image available</p>
-                                            </div>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-
                             <!-- file Upload -->
                             <div>
                                 <label for="file" class="block text-sm font-medium text-gray-300 mb-1">New file
@@ -249,12 +218,33 @@
                                             </label>
                                             <p class="pl-1">or drag and drop</p>
                                         </div>
-                                        <p class="text-xs text-gray-500">PDF, DOCX, PNG up to 10MB</p>
+                                        <p class="text-xs text-gray-500">PDF, DOCX, Max to 3MB</p>
                                     </div>
                                 </div>
                                 @error('file')
                                     <p class="mt-1 text-sm text-rose-400">{{ $message }}</p>
                                 @enderror
+                            </div>
+
+                            {{-- FILE URL --}}
+                            @php
+                                $fileUrl = filter_var($data->file, FILTER_VALIDATE_URL)
+                                    ? $data->file
+                                    : Storage::url($data->file);
+                            @endphp
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Current File</label>
+                                <div class="bg-gray-900/70 border border-gray-700/50 rounded-lg p-4">
+                                    @if ($data->file)
+                                        <a href="{{ $fileUrl }}" target="_blank"
+                                            class="text-blue-400 hover:underline break-all">
+                                            {{ $fileUrl }}
+                                        </a>
+                                    @else
+                                        <p class="text-gray-500">No file available</p>
+                                    @endif
+                                </div>
                             </div>
 
                         </div>

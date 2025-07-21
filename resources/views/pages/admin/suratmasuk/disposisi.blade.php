@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Disposisi Surat')
+
 @section('content')
     <div class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100">
         <div class="container mx-auto px-4 py-8">
@@ -7,7 +9,7 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
                 <div>
                     <h1 class="text-3xl font-bold text-white mb-2">Disposisi Surat</h1>
-                    <p class="text-gray-400">Update data information for {{ $data->nama_surat }}</p>
+                    <p class="text-gray-400">Kelola Proses Surat {{ $data->nama_surat }}</p>
                 </div>
                 <div class="flex gap-3 mt-4 md:mt-0">
                     <a href="{{ route('admin.surat-masuk.index') }}"
@@ -72,7 +74,7 @@
                             <path
                                 d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                         </svg>
-                        Edit data Information
+                        Proses data Information
                     </h2>
                 </div>
 
@@ -83,8 +85,8 @@
 
                     <select name="status" required class="w-full p-3 rounded bg-gray-800 text-white mb-4" required>
                         <option value="">-- Pilih Status --</option>
-                        <option value="proses" {{ old('status', $data->status) == 'proses' ? 'selected' : '' }}>
-                            proses</option>
+                        {{-- <option value="proses" {{ old('status', $data->status) == 'proses' ? 'selected' : '' }}>
+                            proses</option> --}}
                         <option value="diterima" {{ old('status', $data->status) == 'diterima' ? 'selected' : '' }}>
                             diterima</option>
                         <option value="dibatalkan" {{ old('status', $data->status) == 'dibatalkan' ? 'selected' : '' }}>

@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\admin;
 
 use App\Models\SuratKeluar;
+use App\Models\Laporan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\SuratKeluarRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class SuratKeluarController extends Controller
 {
@@ -21,6 +26,52 @@ class SuratKeluarController extends Controller
         })->latest()->paginate(10)->withQueryString();
 
         return view('pages.admin.suratkeluar.index', compact('data'));
+    }
+
+    public function create()
+    {
+        $nosurat = 'SM' . rand(1000, 9999);
+        return view('pages.admin.suratkeluar.create', ['nosurat' => $nosurat]);
+    }
+
+    public function store(SuratKeluarRequest $request)
+    {
+        try {
+            $validated = $request->validated();
+
+            if ($request->hasFile('file')) {
+                $file      = $request->file('file');
+                $fileName  = time() . '-' . $file->getClientOriginalName();
+                $filePath  = $file->storeAs('surat-keluar', $fileName, 'public');
+            }
+
+            suratKeluar::create([
+                'no_surat'     => $validated['no_surat'],
+                'nama_surat'     => $validated['nama_surat'],
+                'tgl_surat'    => $validated['tgl_surat'],
+                'tgl_dikirim'  => $validated['tgl_dikirim'],
+                'keterangan'       => $validated['keterangan'],
+                'perihal'      => $validated['perihal'],
+                'status'       => $validated['status'],
+                'file'         => $filePath ?? null,
+                'user_id'      => $validated['user_id'] ?? Auth::id(),
+            ]);
+
+            Laporan::create([
+                'user_id'         => Auth::id(),
+                'jenis_surat'     => 'masuk',
+                'tgl_surat_masuk' => now(),
+                'keterangan'      => 'Surat Keluar ditambahkan',
+                'file'         => $filePath ?? null,
+            ]);
+
+            return redirect()->route('admin.surat-keluar.index')->with('success', 'Surat berhasil disimpan.');
+        } catch (\Exception $e) {
+            Log::error('Gagal menyimpan surat keluar: ' . $e->getMessage());
+
+            // return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan saat menyimpan surat.']);
+            dd($e->getMessage());
+        }
     }
 
     public function edit($no_surat)
@@ -63,5 +114,13 @@ class SuratKeluarController extends Controller
         $suratkeluar->delete();
 
         return redirect()->route('admin.surat-keluar.index')->with('success', 'Data berhasil dihapus.');
+    }
+
+    public function exportPDF($no_surat)
+    {
+        $suratkeluar = SuratKeluar::where('no_surat', $no_surat)->firstOrFail();
+
+        $pdf = Pdf::loadView('pages.admin.suratkeluar.export', compact('suratkeluar', 'no_surat'));
+        return $pdf->download('data_surat-keluar.pdf');
     }
 }

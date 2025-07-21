@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('surat-masuks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->string('no_surat');
             $table->string('nama_surat');
             $table->date('tgl_surat');
