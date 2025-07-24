@@ -52,7 +52,7 @@ class SuratMasukController extends Controller
                 'tgl_diterima'  => $validated['tgl_diterima'],
                 'asal'       => $validated['asal'],
                 'perihal'      => $validated['perihal'],
-                'status'       => 'proses',
+                'status'       => $validated['status'],
                 'file'         => $filePath ?? null,
                 'user_id'      => $validated['user_id'] ?? Auth::id(),
             ]);

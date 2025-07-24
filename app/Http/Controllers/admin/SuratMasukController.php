@@ -52,7 +52,7 @@ class SuratMasukController extends Controller
                 'tgl_diterima'  => $validated['tgl_diterima'],
                 'asal'       => $validated['asal'],
                 'perihal'      => $validated['perihal'],
-                'status'       => 'proses',
+                'status'       => $validated['status'],
                 'file'         => $filePath ?? null,
                 'user_id'      => $validated['user_id'] ?? Auth::id(),
             ]);
@@ -103,59 +103,7 @@ class SuratMasukController extends Controller
         // dd($suratmasuk);
     }
 
-    public function disposisi($no_surat)
-    {
-        $data = SuratMasuk::where('no_surat', $no_surat)->firstOrFail();
 
-        return view('pages.admin.suratmasuk.disposisi', compact('data'));
-    }
-
-    public function disposisiHandle(SuratKeluarRequest $request, $no_surat)
-    {
-        $request->validated();
-
-        $suratmasuk = SuratMasuk::where('no_surat', $no_surat)->firstOrFail();
-        // Proses upload file jika ada file baru di request
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $fileName = time() . '-' . $file->getClientOriginalName();
-            $filePath = $file->storeAs('surat-keluar', $fileName, 'public');
-        } else {
-            // Jika tidak ada file baru, gunakan file dari surat masuk
-            $filePath = $suratmasuk->file;
-        }
-        if (in_array($request->status, ['diterima', 'dibatalkan'])) {
-            // Pindahkan ke SuratKeluar
-            SuratKeluar::create([
-                'no_surat'   => $suratmasuk->no_surat,
-                'nama_surat'   => $suratmasuk->nama_surat,
-                'tgl_surat'  => $suratmasuk->tgl_surat,
-                'tgl_dikirim'     => now(),
-                'keterangan' => $request->keterangan,
-                'perihal'    => $suratmasuk->perihal,
-                'file'       => $suratmasuk->file,
-                'user_id'    => Auth::id(),
-                'status'     => $request->status
-            ]);
-
-
-            Laporan::create([
-                'user_id'         => Auth::id(),
-                'jenis_surat'     => 'keluar',
-                'tgl_surat_keluar' => now(),
-                'keterangan'      => 'Surat Keluar ditambahkan',
-                'file'         => $filePath,
-            ]);
-        }
-
-        $suratmasuk->delete();
-
-        return redirect()->route('admin.surat-masuk.index')->with('success', 'Disposisi surat berhasil.');
-        // dd([
-        //     'status' => $request->status,
-        //     'no_surat' => $request->no_surat,
-        // ]);
-    }
 
     public function destroy($no_surat)
     {

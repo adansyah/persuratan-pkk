@@ -152,7 +152,7 @@
             <div class="py-4 flex flex-col h-[calc(100%-4rem)]">
                 <!-- Main Navigation -->
                 <div class="px-3 space-y-1">
-                    <div class="sidebar-group-label text-xs font-medium text-sidebar-foreground/70 px-3 mb-2">Main</div>
+                    <div class="sidebar-group-label text-xs font-medium text-sidebar-foreground/70 px-3 mb-2">Menu</div>
 
                     <!-- Dashboard -->
                     <a href="{{ route($user->role . '.dashboard') }}"
@@ -178,18 +178,33 @@
                         <span class="ml-3 sidebar-text">Surat Keluar</span>
                     </a>
 
-                    <!-- laporan -->
-                    <a href="{{ route($user->role . '.laporan') }}"
-                        class="sidebar-menu-item flex items-center h-10 px-3 rounded-md text-sm font-medium {{ request()->routeIs($user->role . '.laporan') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'hover:bg-sidebar-border/50' }} transition-colors"
-                        aria-label="laporan">
-                        <i class="fas fa-clipboard w-5 h-5"></i>
-                        <span class="ml-3 sidebar-text">Laporan</span>
-                    </a>
+
                 </div>
                 <!-- Settings Section -->
+
                 <div class="px-3 mt-6 space-y-1">
-                    <div class="sidebar-group-label text-xs font-medium text-sidebar-foreground/70 px-3 mb-2">Settings
+                    <div class="sidebar-group-label text-xs font-medium text-sidebar-foreground/70 px-3 mb-2">Laporan
                     </div>
+                    <!-- laporan -->
+                    <a href="{{ route($user->role . '.laporan-masuk') }}"
+                        class="sidebar-menu-item flex items-center h-10 px-3 rounded-md text-sm font-medium {{ request()->routeIs($user->role . '.laporan-masuk') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'hover:bg-sidebar-border/50' }} transition-colors"
+                        aria-label="laporan">
+                        <i class="fas fa-clipboard w-5 h-5"></i>
+                        <span class="ml-3 sidebar-text">Surat Masuk</span>
+                    </a>
+                    <a href="{{ route($user->role . '.laporan-keluar') }}"
+                        class="sidebar-menu-item flex items-center h-10 px-3 rounded-md text-sm font-medium {{ request()->routeIs($user->role . '.laporan-keluar') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'hover:bg-sidebar-border/50' }} transition-colors"
+                        aria-label="laporan">
+                        <i class="fas fa-clipboard w-5 h-5"></i>
+                        <span class="ml-3 sidebar-text">Surat Keluar</span>
+                    </a>
+
+                </div>
+
+                <div class="px-3 mt-6 space-y-1">
+                    <div class="sidebar-group-label text-xs font-medium text-sidebar-foreground/70 px-3 mb-2">Setting
+                    </div>
+
 
                     <a href="{{ route($user->role . '.profile') }}"
                         class="sidebar-menu-item flex items-center h-10 px-3 rounded-md text-sm font-medium {{ request()->routeIs($user->role . '.profile') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'hover:bg-sidebar-border/50' }} transition-colors">
@@ -268,8 +283,9 @@
             <footer
                 class="border-t border-gray-200 dark:border-gray-800 py-4 px-6 text-center text-sm text-gray-500 dark:text-gray-400">
                 <p>
-                    Developed by <a href="https://github.com/adansyah" class="font-medium text-primary hover:underline"
-                        target="_blank" rel="noopener noreferrer">Syahdan Mutahariq | Fullstack Developer</a>
+                    Developed by <a href="https://github.com/adansyah"
+                        class="font-medium text-primary hover:underline" target="_blank"
+                        rel="noopener noreferrer">Syahdan Mutahariq | Fullstack Developer</a>
                 </p>
                 <p class="mt-1">
                     &copy; 2025 Persuratan PKK. All rights reserved.

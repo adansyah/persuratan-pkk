@@ -90,8 +90,8 @@
                                     <span class="text-rose-400">*</span></label>
                                 <input type="text" id="no_surat" name="no_surat" value="{{ old('no_surat', $nosurat) }}"
                                     required
-                                    class="w-full px-4 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg text-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
-                                    placeholder="Masukan No Surat" autofocus readonly>
+                                    class="w-full px-4 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg  focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
+                                    placeholder="Masukan No Surat" autofocus>
                                 @error('no_surat')
                                     <p class="mt-1 text-sm text-rose-400">{{ $message }}</p>
                                 @enderror
@@ -232,7 +232,7 @@
                             </svg>
                             Add Surat
                         </button>
-                        <a href="{{ route('admin.surat-keluar.index') }}"
+                        <a href="{{ route('sekretaris.surat-keluar.index') }}"
                             class="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2.5 px-6 rounded-lg transition-all duration-200 flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                 fill="currentColor">

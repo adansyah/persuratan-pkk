@@ -34,11 +34,11 @@
     <table>
         <thead>
             <tr>
-                <th>Ditangani Oleh</th>
-                <th>Jenis Surat</th>
-                <th>Tanggal Surat Masuk</th>
-                <th>Tanggal Surat Keluar</th>
-                <th>Keterangan</th>
+                <th>No Surat</th>
+                <th>Nama Surat</th>
+                <th>Asal</th>
+                <th>Tanggal Surat</th>
+                <th>Tanggal Surat Diterima</th>
                 <th>Perihal</th>
                 <th>Status</th>
                 <th>File</th>

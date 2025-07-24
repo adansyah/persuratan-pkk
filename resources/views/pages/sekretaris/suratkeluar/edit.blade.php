@@ -99,7 +99,7 @@
                             <!-- Nama Surat -->
                             <input type="text"
                                 class="w-full px-4 py-2.5 bg-gray-900/70 border border-gray-700/50 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
-                                name="no_surat" value="{{ $data->no_surat }}" readonly hidden">
+                                name="no_surat" value="{{ $data->no_surat }}" hidden">
                             <div>
                                 <label for="nama_surat" class="block text-sm font-medium text-gray-300 mb-1">Nama Surat
                                     <span class="text-rose-400">*</span></label>

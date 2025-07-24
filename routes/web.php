@@ -22,9 +22,10 @@ use App\Http\Controllers\sekte\ProfileController as SekteProfileController;
 Route::middleware('admin')->prefix('admin')->group(function () {
     //dashboard & profile & laporan
     Route::get('/dashboard', [HomeController::class, 'index'])->name('admin.dashboard');
-    Route::get('/laporan', [AdminLaporanController::class, 'index'])->name('admin.laporan');
-    Route::delete('/laporan/destroy/{id}', [AdminLaporanController::class, 'destroy'])->name('admin.laporan.destroy');
-    Route::get('/laporan/export', [AdminLaporanController::class, 'exportPDF'])->name('admin.laporan.export');
+    Route::get('/laporan-masuk', [AdminLaporanController::class, 'index'])->name('admin.laporan-masuk');
+    Route::get('/laporan-keluar', [AdminLaporanController::class, 'Laporan'])->name('admin.laporan-keluar');
+    Route::get('/laporan-masuk/export', [AdminLaporanController::class, 'exportPDF'])->name('admin.laporan-masuk.export');
+    Route::get('/laporan-keluar/export', [AdminLaporanController::class, 'exportPDFOut'])->name('admin.laporan-keluar.export');
     Route::get('/surat-masuk/export/{no_surat}', [AdminSuratMasukController::class, 'exportPDF'])->name('admin.suratmasuk.export');
     Route::get('/surat-keluar/export/{no_surat}', [AdminSuratKeluarController::class, 'exportPDF'])->name('admin.suratkeluar.export');
     //surat masuk
@@ -48,8 +49,10 @@ Route::middleware('admin')->prefix('admin')->group(function () {
 Route::middleware('ketua')->prefix('ketua')->group(function () {
     Route::get('/dashboard', [KetuaDashboardController::class, 'index'])->name('ketua.dashboard');
     Route::get('/profile', [KetuaProfileController::class, 'index'])->name('ketua.profile');
-    Route::get('/laporan', [KetuaLaporanController::class, 'index'])->name('ketua.laporan');
-    Route::get('/laporan/export', [KetuaLaporanController::class, 'exportPDF'])->name('ketua.laporan.export');
+    Route::get('/laporan-masuk', [KetuaLaporanController::class, 'index'])->name('ketua.laporan-masuk');
+    Route::get('/laporan-keluar', [KetuaLaporanController::class, 'Laporan'])->name('ketua.laporan-keluar');
+    Route::get('/laporan-masuk/export', [KetuaLaporanController::class, 'exportPDF'])->name('ketua.laporan-masuk.export');
+    Route::get('/laporan-keluar/export', [KetuaLaporanController::class, 'exportPDFOut'])->name('ketua.laporan-keluar.export');
     Route::get('/surat-keluar/export/{no_surat}', [KetuaSuratKeluarController::class, 'exportPDF'])->name('ketua.suratkeluar.export');
     Route::get('/surat-masuk/export/{no_surat}', [KetuaSuratMasukController::class, 'exportPDF'])->name('ketua.suratmasuk.export');
 
@@ -64,18 +67,18 @@ Route::middleware('ketua')->prefix('ketua')->group(function () {
 // akses sekretaris
 Route::middleware('sekretaris')->prefix('sekretaris')->group(function () {
     Route::get('/dashboard', [SekteDashboardController::class, 'index'])->name('sekretaris.dashboard');
-    Route::get('/laporan', [SekteLaporanController::class, 'index'])->name('sekretaris.laporan');
-    Route::delete('/laporan/destroy/{id}', [SekteLaporanController::class, 'destroy'])->name('sekretaris.laporan.destroy');
-    Route::get('/laporan/export', [SekteLaporanController::class, 'exportPDF'])->name('sekretaris.laporan.export');
-    Route::get('/surat-masuk/export/{no_surat}', [SekteSuratMasukController::class, 'exportPDF'])->name('sekretaris.suratmasuk.export');
-    Route::get('/surat-keluar/export/{no_surat}', [SekteSuratKeluarController::class, 'exportPDF'])->name('sekretaris.suratkeluar.export');
+    Route::get('/laporan-masuk', [SekteLaporanController::class, 'index'])->name('sekretaris.laporan-masuk');
+    Route::get('/laporan-keluar', [SekteLaporanController::class, 'Laporan'])->name('sekretaris.laporan-keluar');
+    Route::get('/laporan-masuk/export', [SekteLaporanController::class, 'exportPDF'])->name('sekretaris.laporan-masuk.export');
+    Route::get('/laporan-keluar/export', [SekteLaporanController::class, 'exportPDFOut'])->name('sekretaris.laporan-keluar.export');
+    Route::get('/surat-masuk/export/{no_surat}', [SekteLaporanController::class, 'exportPDF'])->name('sekretaris.suratmasuk.export');
+    Route::get('/surat-keluar/export/{no_surat}', [SekteLaporanController::class, 'exportPDF'])->name('sekretaris.suratkeluar.export');
 
     //surat masuk
     Route::resource('surat-masuk', SekteSuratMasukController::class)
         ->parameters(['surat-masuk' => 'no_surat'])
         ->names('sekretaris.surat-masuk');
-    Route::get('/surat-masuk/{no_surat}/disposisi', [SekteSuratMasukController::class, 'disposisi'])->name('sekretaris.surat-masuk.disposisi');
-    Route::post('/surat-masuk/{no_surat}/disposisi', [SekteSuratMasukController::class, 'disposisiHandle'])->name('sekretaris.surat-masuk.disposisi.handle');
+
     Route::resource('surat-keluar', SekteSuratkeluarController::class)
         ->parameters(['surat-keluar' => 'no_surat'])
         ->names('sekretaris.surat-keluar');

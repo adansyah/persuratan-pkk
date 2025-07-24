@@ -34,11 +34,11 @@
     <table>
         <thead>
             <tr>
-                <th>No Surat</th>
-                <th>Nama Surat</th>
-                <th>Asal</th>
-                <th>Tanggal Surat</th>
-                <th>Tanggal Surat Diterima</th>
+                <th>Ditangani Oleh</th>
+                <th>Jenis Surat</th>
+                <th>Tanggal Surat Masuk</th>
+                <th>Tanggal Surat Keluar</th>
+                <th>Keterangan</th>
                 <th>Perihal</th>
                 <th>Status</th>
                 <th>File</th>
@@ -46,18 +46,18 @@
         </thead>
         <tbody>
             <tr>
-                <td>{{ $suratmasuk->no_surat }}</td>
-                <td>{{ $suratmasuk->nama_surat }}</td>
-                <td> {{ $suratmasuk->tgl_surat ? \Carbon\Carbon::parse($suratmasuk->tgl_surat)->translatedFormat('d F Y') : \Carbon\Carbon::parse($suratmasuk->tgl_diterima)->translatedFormat('d F Y') }}
+                <td>{{ $suratkeluar->no_surat }}</td>
+                <td>{{ $suratkeluar->nama_surat }}</td>
+                <td> {{ $suratkeluar->tgl_surat ? \Carbon\Carbon::parse($suratkeluar->tgl_surat)->translatedFormat('d F Y') : \Carbon\Carbon::parse($suratkeluar->tgl_dikirim)->translatedFormat('d F Y') }}
                 </td>
-                <td>{{ $suratmasuk->tgl_diterima ? \Carbon\Carbon::parse($suratmasuk->tgl_diterima)->translatedFormat('d F Y') : \Carbon\Carbon::parse($suratmasuk->tgl_surat)->translatedFormat('d F Y') }}
+                <td>{{ $suratkeluar->tgl_dikirim ? \Carbon\Carbon::parse($suratkeluar->tgl_dikirim)->translatedFormat('d F Y') : \Carbon\Carbon::parse($suratkeluar->tgl_surat)->translatedFormat('d F Y') }}
                 </td>
-                <td>{{ $suratmasuk->asal ?? '-' }}</td>
-                <td>{{ $suratmasuk->perihal ?? '-' }}</td>
-                <td>{{ $suratmasuk->status ?? '-' }}</td>
+                <td>{{ $suratkeluar->keterangan ?? '-' }}</td>
+                <td>{{ $suratkeluar->perihal ?? '-' }}</td>
+                <td>{{ $suratkeluar->status ?? '-' }}</td>
                 <td class="py-3 px-4">
-                    @if ($suratmasuk->file)
-                        <a href="{{ asset('storage/' . $suratmasuk->file) }}" target="_blank" download
+                    @if ($suratkeluar->file)
+                        <a href="{{ asset('storage/' . $suratkeluar->file) }}" target="_blank" download
                             class="text-blue-500 underline hover:text-blue-700">
                             Unduh File
                         </a>
